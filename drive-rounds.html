@@ -18,4 +18,222 @@
     </header>
 
     <nav class="main-navigation">
-        <a href="admin-dashboard
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="students.html">Students</a>
+        <a href="drives.html">Placement Drives</a>
+        <a href="drive-tracker.html">Drive Tracker</a>
+        <a href="drive-rounds.html">Round Attendance</a>
+        <a href="reports.html">Placement Reports</a>
+        <a href="academics.html">Academic & Backlogs</a>
+    </nav>
+
+    <main class="content-container">
+        <section class="panel">
+            <h2>Select Placement Drive</h2>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="roundDriveSelect">Placement Drive *</label>
+                    <select id="roundDriveSelect">
+                        <option value="">Select a placement drive</option>
+                    </select>
+                </div>
+            </div>
+
+            <p id="roundDriveDetails" class="status-message"></p>
+        </section>
+
+        <section class="panel">
+            <h2 id="roundFormTitle">Create Drive Round</h2>
+
+            <form id="roundForm">
+                <input type="hidden" id="roundRecordId">
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="roundNumber">Round Number *</label>
+                        <input
+                            type="number"
+                            id="roundNumber"
+                            min="1"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="roundName">Round Name *</label>
+                        <input
+                            type="text"
+                            id="roundName"
+                            placeholder="Example: Technical Interview 1"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="roundType">Round Type</label>
+                        <select id="roundType">
+                            <option value="">Select type</option>
+                            <option value="Assessment">
+                                Assessment
+                            </option>
+                            <option value="Coding">
+                                Coding
+                            </option>
+                            <option value="Group Discussion">
+                                Group Discussion
+                            </option>
+                            <option value="Technical Interview">
+                                Technical Interview
+                            </option>
+                            <option value="Managerial Interview">
+                                Managerial Interview
+                            </option>
+                            <option value="HR Interview">
+                                HR Interview
+                            </option>
+                            <option value="Document Verification">
+                                Document Verification
+                            </option>
+                            <option value="Other">
+                                Other
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="roundScheduledAt">
+                            Scheduled Date and Time
+                        </label>
+                        <input
+                            type="datetime-local"
+                            id="roundScheduledAt"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="roundVenue">Venue</label>
+                        <input type="text" id="roundVenue">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="roundStatus">Round Status</label>
+                        <select id="roundStatus">
+                            <option value="Scheduled">Scheduled</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="quick-actions" style="margin-top: 20px;">
+                    <button type="submit" id="saveRoundButton">
+                        Save Round
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancelRoundEdit"
+                        hidden
+                    >
+                        Cancel Edit
+                    </button>
+                </div>
+
+                <p id="roundFormMessage" class="status-message"></p>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Rounds for Selected Drive</h2>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Round</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Schedule</th>
+                            <th>Venue</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="roundTableBody">
+                        <tr>
+                            <td colspan="7">
+                                Select a placement drive.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2 id="attendanceHeading">
+                Select a round to mark attendance
+            </h2>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="roundStudentSearch">
+                        Search Student
+                    </label>
+                    <input
+                        type="search"
+                        id="roundStudentSearch"
+                        placeholder="Name, University ID or department"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button type="button" id="markAllPresent">
+                        Mark All Present
+                    </button>
+                </div>
+            </div>
+
+            <p id="attendanceMessage" class="status-message"></p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>University ID</th>
+                            <th>Student</th>
+                            <th>Department</th>
+                            <th>Attendance</th>
+                            <th>Result</th>
+                            <th>Score</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="roundAttendanceBody">
+                        <tr>
+                            <td colspan="7">
+                                Select a drive round.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="quick-actions" style="margin-top: 20px;">
+                <button type="button" id="saveAllRoundAttendance">
+                    Save All Attendance
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/drive-rounds.js"></script>
+</body>
+</html>
