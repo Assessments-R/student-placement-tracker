@@ -30,9 +30,9 @@ loginForm.addEventListener("submit", async (event) => {
                 .eq("id", data.user.id)
                 .single();
 
-        if (profileError) {
-            throw new Error("Your user profile could not be found.");
-        }
+      if (profileError) {
+    throw new Error(`Profile error: ${profileError.message}`);
+}
 
         if (!profile.is_active) {
             await supabaseClient.auth.signOut();
