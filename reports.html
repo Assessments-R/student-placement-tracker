@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Reports</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
+<body>
+    <header class="topbar">
+        <div>
+            <h1>Placement Reports</h1>
+            <p id="welcomeMessage">Loading...</p>
+        </div>
+
+        <button type="button" id="logoutButton">Logout</button>
+    </header>
+
+    <nav class="main-navigation">
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="students.html">Students</a>
+        <a href="drives.html">Placement Drives</a>
+        <a href="reports.html">Reports</a>
+    </nav>
+
+    <main class="content-container">
+        <section class="panel">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="branchFilter">Branch</label>
+                    <select id="branchFilter">
+                        <option value="">All branches</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="batchFilter">Batch</label>
+                    <select id="batchFilter">
+                        <option value="">All batches</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button type="button" id="exportStudentsButton">
+                        Export Student Report
+                    </button>
+                </div>
+            </div>
+
+            <p id="reportMessage" class="status-message"></p>
+        </section>
+
+        <section class="dashboard-cards">
+            <article class="dashboard-card">
+                <h3>Total Students</h3>
+                <p id="reportTotalStudents">—</p>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>Placed Students</h3>
+                <p id="reportPlacedStudents">—</p>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>Unplaced Students</h3>
+                <p id="reportUnplacedStudents">—</p>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>Placement Percentage</h3>
+                <p id="reportPlacementPercentage">—</p>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>Total Offers</h3>
+                <p id="reportTotalOffers">—</p>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>Highest Package</h3>
+                <p id="reportHighestPackage">—</p>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>Average Package</h3>
+                <p id="reportAveragePackage">—</p>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>Total Drives</h3>
+                <p id="reportTotalDrives">—</p>
+            </article>
+        </section>
+
+        <section class="panel">
+            <h2>Branch-Wise Placement Summary</h2>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Branch</th>
+                            <th>Total Students</th>
+                            <th>Placed</th>
+                            <th>Unplaced</th>
+                            <th>Placement Percentage</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="branchReportBody">
+                        <tr>
+                            <td colspan="5">Loading report...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Company-Wise Offer Summary</h2>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Drives</th>
+                            <th>Offers</th>
+                            <th>Highest Package</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="companyReportBody">
+                        <tr>
+                            <td colspan="4">Loading report...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Student Placement Summary</h2>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>University ID</th>
+                            <th>Name</th>
+                            <th>Branch</th>
+                            <th>Batch</th>
+                            <th>CGPA</th>
+                            <th>Drives Attended</th>
+                            <th>Offers</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="studentReportBody">
+                        <tr>
+                            <td colspan="8">Loading report...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/reports.js"></script>
+</body>
+</html>
