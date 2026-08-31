@@ -1,4 +1,6 @@
-:root {
+[hidden] {
+    display: none !important;
+}:root {
     --primary: #1d4ed8;
     --primary-dark: #1e3a8a;
     --background: #f4f7fb;
