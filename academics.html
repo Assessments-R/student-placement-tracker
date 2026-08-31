@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic and Backlog Reports</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div>
+            <h1>Academic & Backlog Reports</h1>
+            <p id="welcomeMessage">Loading...</p>
+        </div>
+
+        <button type="button" id="logoutButton">Logout</button>
+    </header>
+
+    <nav class="main-navigation">
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="students.html">Students</a>
+        <a href="drives.html">Placement Drives</a>
+        <a href="reports.html">Placement Reports</a>
+        <a href="academics.html">Academic & Backlogs</a>
+    </nav>
+
+    <main class="content-container">
+        <section class="panel">
+            <h2>Filter Students</h2>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="academicBranchFilter">Department</label>
+                    <select id="academicBranchFilter">
+                        <option value="">All departments</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="academicBatchFilter">Batch</label>
+                    <select id="academicBatchFilter">
+                        <option value="">All batches</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="minimumTenthFilter">
+                        Minimum 10th Percentage
+                    </label>
+                    <input
+                        type="number"
+                        id="minimumTenthFilter"
+                        min="0"
+                        max="100"
+                        step="0.01"
+                        placeholder="Example: 80"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="minimumInterFilter">
+                        Minimum Intermediate Percentage
+                    </label>
+                    <input
+                        type="number"
+                        id="minimumInterFilter"
+                        min="0"
+                        max="100"
+                        step="0.01"
+                        placeholder="Example: 80"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="minimumDiplomaFilter">
+                        Minimum Diploma Percentage
+                    </label>
+                    <input
+                        type="number"
+                        id="minimumDiplomaFilter"
+                        min="0"
+                        max="100"
+                        step="0.01"
+                        placeholder="Example: 80"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="minimumCgpaFilter">
+                        Minimum B.Tech CGPA
+                    </label>
+                    <input
+                        type="number"
+                        id="minimumCgpaFilter"
+                        min="0"
+                        max="10"
+                        step="0.01"
+                        placeholder="Example: 8.0"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="backlogFilter">Backlog Criteria</label>
+                    <select id="backlogFilter">
+                        <option value="all">All students</option>
+                        <option value="none">No active backlogs</option>
+                        <option value="with">One or more backlogs</option>
+                        <option value="exact">Exact number of backlogs</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="exactBacklogGroup" hidden>
+                    <label for="exactBacklogs">
+                        Exact Active Backlogs
+                    </label>
+                    <input
+                        type="number"
+                        id="exactBacklogs"
+                        min="0"
+                        value="0"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button type="button" id="clearAcademicFilters">
+                        Clear Filters
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button type="button" id="exportAcademicReport">
+                        Export Filtered Students
+                    </button>
+                </div>
+            </div>
+
+            <p id="academicMessage" class="status-message"></p>
+        </section>
+
+        <section class="dashboard-cards">
+            <article class="dashboard-card">
+                <h3>Matching Students</h3>
+                <p id="matchingStudents">—</p>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>10th: 80% and Above</h3>
+                <p id="tenthAbove80">—</p>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>10th: 85% and Above</h3>
+                <p id="tenthAbove85">—</p>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>Inter/Diploma: 80% and Above</h3>
+                <p id="interAbove80">—</p>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>Inter/Diploma: 85% and Above</h3>
+                <p id="interAbove85">—</p>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>B.Tech: 8.0 CGPA and Above</h3>
+                <p id="cgpaAbove8">—</p>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>B.Tech: 8.5 CGPA and Above</h3>
+                <p id="cgpaAbove85">—</p>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>Students with Backlogs</h3>
+                <p id="studentsWithBacklogs">—</p>
+            </article>
+        </section>
+
+        <section class="panel">
+            <h2>Department-Wise Backlog Summary</h2>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Department</th>
+                            <th>Total Students</th>
+                            <th>No Backlogs</th>
+                            <th>With Backlogs</th>
+                            <th>Total Active Backlogs</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="departmentBacklogBody">
+                        <tr>
+                            <td colspan="5">Loading report...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Filtered Student Details</h2>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>University ID</th>
+                            <th>Student Name</th>
+                            <th>Department</th>
+                            <th>Batch</th>
+                            <th>10th %</th>
+                            <th>Inter %</th>
+                            <th>Diploma %</th>
+                            <th>B.Tech CGPA</th>
+                            <th>Active Backlogs</th>
+                            <th>Placement Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="academicStudentBody">
+                        <tr>
+                            <td colspan="10">Loading students...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/academics.js"></script>
+</body>
+</html>
