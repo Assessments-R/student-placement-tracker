@@ -1,1 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Sessions and Attendance</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
+<body>
+    <header class="topbar">
+        <div>
+            <h1>Training Sessions & Attendance</h1>
+            <p id="welcomeMessage">Loading...</p>
+        </div>
+
+        <button type="button" id="logoutButton">Logout</button>
+    </header>
+
+    <nav class="main-navigation">
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="students.html">Students</a>
+        <a href="drives.html">Placement Drives</a>
+        <a href="drive-tracker.html">Drive Tracker</a>
+        <a href="drive-rounds.html">Round Attendance</a>
+        <a href="training.html">Training</a>
+        <a href="reports.html">Placement Reports</a>
+        <a href="academics.html">Academic & Backlogs</a>
+    </nav>
+
+    <main class="content-container">
+        <section class="panel">
+            <h2 id="trainingFormTitle">Create Training Session</h2>
+
+            <form id="trainingForm">
+                <input type="hidden" id="trainingRecordId">
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="sessionCategory">
+                            Session Category *
+                        </label>
+                        <select id="sessionCategory" required>
+                            <option value="General">General</option>
+                            <option value="Company Specific">
+                                Company Specific
+                            </option>
+                        </select>
+                    </div>
+
+                    <div
+                        class="form-group"
+                        id="trainingCompanyGroup"
+                        hidden
+                    >
+                        <label for="trainingCompany">Company *</label>
+                        <select id="trainingCompany">
+                            <option value="">Select a company</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trainingTitle">
+                            Training Title *
+                        </label>
+                        <input type="text" id="trainingTitle" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trainingType">Training Type</label>
+                        <select id="trainingType">
+                            <option value="Aptitude">Aptitude</option>
+                            <option value="Technical">Technical</option>
+                            <option value="Coding">Coding</option>
+                            <option value="Communication">
+                                Communication
+                            </option>
+                            <option value="Interview Preparation">
+                                Interview Preparation
+                            </option>
+                            <option value="Company Specific">
+                                Company Specific
+                            </option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trainerName">Trainer Name</label>
+                        <input type="text" id="trainerName">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trainingDate">Session Date *</label>
+                        <input type="date" id="trainingDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trainingStartTime">Start Time</label>
+                        <input type="time" id="trainingStartTime">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trainingEndTime">End Time</label>
+                        <input type="time" id="trainingEndTime">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trainingVenue">Venue</label>
+                        <input type="text" id="trainingVenue">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trainingBranches">
+                            Eligible Departments
+                        </label>
+                        <input
+                            type="text"
+                            id="trainingBranches"
+                            placeholder="CSE, ECE, EEE; leave blank for all"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trainingBatch">Eligible Batch</label>
+                        <input
+                            type="text"
+                            id="trainingBatch"
+                            placeholder="Example: 2023-2027"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trainingStatus">
+                            Session Status
+                        </label>
+                        <select id="trainingStatus">
+                            <option value="Scheduled">Scheduled</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 18px;">
+                    <label for="trainingDescription">Description</label>
+                    <textarea
+                        id="trainingDescription"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <div class="quick-actions" style="margin-top: 20px;">
+                    <button type="submit" id="saveTrainingButton">
+                        Save Training Session
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancelTrainingEdit"
+                        hidden
+                    >
+                        Cancel Edit
+                    </button>
+                </div>
+
+                <p id="trainingFormMessage" class="status-message"></p>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Training Sessions</h2>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="trainingSearch">Search Sessions</label>
+                    <input
+                        type="search"
+                        id="trainingSearch"
+                        placeholder="Title, company, type or trainer"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="trainingCategoryFilter">Category</label>
+                    <select id="trainingCategoryFilter">
+                        <option value="">All categories</option>
+                        <option value="General">General</option>
+                        <option value="Company Specific">
+                            Company Specific
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Company</th>
+                            <th>Title</th>
+                            <th>Type</th>
+                            <th>Batch</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="trainingTableBody">
+                        <tr>
+                            <td colspan="8">
+                                Loading training sessions...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2 id="trainingAttendanceHeading">
+                Select a training session to mark attendance
+            </h2>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="trainingStudentSearch">
+                        Search Student
+                    </label>
+                    <input
+                        type="search"
+                        id="trainingStudentSearch"
+                        placeholder="Name, University ID or department"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button type="button" id="markTrainingAllPresent">
+                        Mark All Present
+                    </button>
+                </div>
+            </div>
+
+            <p id="trainingAttendanceMessage" class="status-message"></p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>University ID</th>
+                            <th>Student</th>
+                            <th>Department</th>
+                            <th>Batch</th>
+                            <th>Attendance</th>
+                            <th>Assessment Score</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="trainingAttendanceBody">
+                        <tr>
+                            <td colspan="7">
+                                Select a training session.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="quick-actions" style="margin-top: 20px;">
+                <button type="button" id="saveTrainingAttendance">
+                    Save All Attendance
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/training.js"></script>
+</body>
+</html>
