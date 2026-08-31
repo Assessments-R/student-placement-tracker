@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drive Participation and Offers</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div>
+            <h1>Drive Participation & Offers</h1>
+            <p id="welcomeMessage">Loading...</p>
+        </div>
+
+        <button type="button" id="logoutButton">Logout</button>
+    </header>
+
+    <nav class="main-navigation">
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="students.html">Students</a>
+        <a href="drives.html">Placement Drives</a>
+        <a href="drive-tracker.html">Drive Tracker</a>
+        <a href="reports.html">Placement Reports</a>
+        <a href="academics.html">Academic & Backlogs</a>
+    </nav>
+
+    <main class="content-container">
+        <section class="panel">
+            <h2>Select Placement Drive</h2>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="selectedDrive">Placement Drive *</label>
+                    <select id="selectedDrive" required>
+                        <option value="">Select a placement drive</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="participationSearch">
+                        Search Participation Records
+                    </label>
+                    <input
+                        type="search"
+                        id="participationSearch"
+                        placeholder="Student name or University ID"
+                    >
+                </div>
+            </div>
+
+            <p id="selectedDriveDetails" class="status-message"></p>
+        </section>
+
+        <section class="panel">
+            <h2 id="participationFormTitle">Add Student Participation</h2>
+
+            <form id="participationForm">
+                <input type="hidden" id="participationRecordId">
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="participationStudent">Student *</label>
+                        <select id="participationStudent" required>
+                            <option value="">Select a student</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eligibleStatus">Eligibility</label>
+                        <select id="eligibleStatus">
+                            <option value="true">Eligible</option>
+                            <option value="false">Not Eligible</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registeredStatus">Registration</label>
+                        <select id="registeredStatus">
+                            <option value="false">Not Registered</option>
+                            <option value="true">Registered</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="attendedStatus">Attendance</label>
+                        <select id="attendedStatus">
+                            <option value="false">Not Attended</option>
+                            <option value="true">Attended</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="currentStage">Current Stage</label>
+                        <select id="currentStage">
+                            <option value="Eligible">Eligible</option>
+                            <option value="Registered">Registered</option>
+                            <option value="Pre-Placement Talk">
+                                Pre-Placement Talk
+                            </option>
+                            <option value="Assessment">Assessment</option>
+                            <option value="Group Discussion">
+                                Group Discussion
+                            </option>
+                            <option value="Technical Interview">
+                                Technical Interview
+                            </option>
+                            <option value="Managerial Interview">
+                                Managerial Interview
+                            </option>
+                            <option value="HR Interview">HR Interview</option>
+                            <option value="Document Verification">
+                                Document Verification
+                            </option>
+                            <option value="Selected">Selected</option>
+                            <option value="Rejected">Rejected</option>
+                            <option value="Absent">Absent</option>
+                            <option value="Withdrawn">Withdrawn</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="participationStatus">
+                            Participation Status
+                        </label>
+                        <select id="participationStatus">
+                            <option value="Active">Active</option>
+                            <option value="Selected">Selected</option>
+                            <option value="Rejected">Rejected</option>
+                            <option value="Absent">Absent</option>
+                            <option value="Withdrawn">Withdrawn</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assessmentScore">
+                            Assessment Score
+                        </label>
+                        <input
+                            type="number"
+                            id="assessmentScore"
+                            min="0"
+                            max="100"
+                            step="0.01"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="participationRemarks">Remarks</label>
+                        <input type="text" id="participationRemarks">
+                    </div>
+                </div>
+
+                <div class="quick-actions" style="margin-top: 20px;">
+                    <button type="submit" id="saveParticipationButton">
+                        Save Participation
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancelParticipationEdit"
+                        hidden
+                    >
+                        Cancel Edit
+                    </button>
+                </div>
+
+                <p
+                    id="participationFormMessage"
+                    class="status-message"
+                ></p>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Drive Participation Records</h2>
+
+            <p id="participationCount" class="status-message"></p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>University ID</th>
+                            <th>Student</th>
+                            <th>Department</th>
+                            <th>Registered</th>
+                            <th>Attended</th>
+                            <th>Current Stage</th>
+                            <th>Status</th>
+                            <th>Score</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="participationTableBody">
+                        <tr>
+                            <td colspan="9">
+                                Select a placement drive.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2 id="offerFormTitle">Record Placement Offer</h2>
+
+            <form id="offerForm">
+                <input type="hidden" id="offerRecordId">
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="offerStudent">Selected Student *</label>
+                        <select id="offerStudent" required>
+                            <option value="">Select a student</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerJobRole">Job Role *</label>
+                        <input type="text" id="offerJobRole" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerPackage">Package (LPA)</label>
+                        <input
+                            type="number"
+                            id="offerPackage"
+                            min="0"
+                            step="0.01"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerDate">Offer Date</label>
+                        <input type="date" id="offerDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="joiningDate">Joining Date</label>
+                        <input type="date" id="joiningDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="joiningLocation">
+                            Joining Location
+                        </label>
+                        <input type="text" id="joiningLocation">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerStatus">Offer Status</label>
+                        <select id="offerStatus">
+                            <option value="Offered">Offered</option>
+                            <option value="Accepted">Accepted</option>
+                            <option value="Declined">Declined</option>
+                            <option value="Joined">Joined</option>
+                            <option value="Revoked">Revoked</option>
+                            <option value="Deferred">Deferred</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerLetterUrl">
+                            Offer Letter URL
+                        </label>
+                        <input type="url" id="offerLetterUrl">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerRemarks">Remarks</label>
+                        <input type="text" id="offerRemarks">
+                    </div>
+                </div>
+
+                <div class="quick-actions" style="margin-top: 20px;">
+                    <button type="submit" id="saveOfferButton">
+                        Save Offer
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancelOfferEdit"
+                        hidden
+                    >
+                        Cancel Edit
+                    </button>
+                </div>
+
+                <p id="offerFormMessage" class="status-message"></p>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Offers for Selected Drive</h2>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>University ID</th>
+                            <th>Student</th>
+                            <th>Role</th>
+                            <th>Package</th>
+                            <th>Offer Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="offerTableBody">
+                        <tr>
+                            <td colspan="7">
+                                Select a placement drive.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/drive-tracker.js"></script>
+</body>
+</html>
